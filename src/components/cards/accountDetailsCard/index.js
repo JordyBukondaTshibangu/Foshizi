@@ -31,7 +31,7 @@ const AccountDetailsCard = ({ width }) => {
             <p>South Africa</p>
           </div>
         </Content>
-        <Button btnText="Upgrade" link="surveys" bg="primary" />
+        <Button btnText="Upgrade" link="create-survey" bg="primary" />
       </ContentContainer>
     </Card>
   );

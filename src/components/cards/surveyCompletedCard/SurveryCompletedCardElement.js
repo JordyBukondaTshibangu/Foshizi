@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import {
-  buildStyles,
-  CircularProgressbarWithChildren,
-} from "react-circular-progressbar";
+import { buildStyles, CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 export const ContentContainer = styled.div`
   display: flex;
@@ -62,6 +59,7 @@ export const SurveyCompleteGridSecondItemH1 = styled.h1`
   color: grey;
   font-weight: bold;
 `;
+
 
 export const SurveyCompleteGridItemData = ({
   text = "Opened",
@@ -127,28 +125,19 @@ export const DataHolder = ({ data = [1, 2, 3, 4] }) => {
     textSize: "22px",
     textColor: "grey",
   };
-  return (
-    <>
-      {data.map((i, x) => (
-        <ProgressbarContainer key={x}>
-          <CircularProgressbarWithChildren
-            value={i?.questions?.map((i) => i.answers).length}
-            maxValue={1000}
-            children={
-              <CircularProgressbarChild
-                text="Answers"
-                value={i?.questions?.map((i) => i.answers).length}
-              />
-            }
-            counterClockwise={true}
-            styles={buildStyles({
-              ...styles,
-              rotation: 0.25,
-              pathColor: "#4d88ff",
-            })}
-          />
-        </ProgressbarContainer>
-      ))}
-    </>
-  );
-};
+  return (<>{data.map((i, x) => <ProgressbarContainer key={x} >
+
+    <CircularProgressbarWithChildren
+      value={i?.questions?.map(i => i.answers).length}
+      maxValue={1000}
+      children={<CircularProgressbarChild text="Answers" value={i?.questions?.map(i => i.answers).length} />}
+      counterClockwise={true}
+      styles={buildStyles({
+        ...styles,
+        rotation: 0.25,
+        pathColor: "#4d88ff",
+      })}
+    />
+  </ProgressbarContainer>)}</>)
+
+}

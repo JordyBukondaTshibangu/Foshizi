@@ -3,7 +3,7 @@ import {
   FaReact,
   FaFolder,
   FaEnvelope,
-  // FaArrowUp,
+  FaArrowUp,
   FaPowerOff,
 } from "react-icons/fa";
 import {
@@ -20,8 +20,10 @@ import IconText from "@/components/base/iconText";
 import profileImage from "../../../../assets/images/profile.png";
 import { useRouter } from "next/router";
 import {
+  ContentWrapper,
   ImageContainer,
   ImageElement,
+  Subtitle,
 } from "@/components/base/iconText/IconTextElement";
 
 const links = [
@@ -41,10 +43,10 @@ const links = [
     linkName: "Contacts",
     icon: <FaEnvelope />,
   },
-  // {
-  //   linkName: "Update to SSO",
-  //   icon: <FaArrowUp />,
-  // },
+  {
+    linkName: "Update to SSO",
+    icon: <FaArrowUp />,
+  },
   {
     linkName: "Logout",
     icon: <FaPowerOff />,

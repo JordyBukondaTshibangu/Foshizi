@@ -11,7 +11,7 @@ const IconText = ({ image, title, subtitle, size, textSize }) => {
   return (
     <IconTextWrapper textSize={textSize}>
       <ImageContainer big={size}>
-        <ImageElement src={image} width={size} height={size} alt={title} />
+        <ImageElement alt=" " src={image} width={size} height={size} alt={title} />
       </ImageContainer>
       <ContentWrapper>
         <Title textSize={textSize}>{title}</Title>

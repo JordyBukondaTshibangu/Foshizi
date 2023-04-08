@@ -98,3 +98,32 @@ export const surveyData = {
     },
   ],
 };
+
+export const PerspectivePredictiveAnalysisCardData = {
+  min: 0,
+  max: 0,
+  values: [200, 250, 110, 350, 200, 300, 100, 300, 350, 200, 200, 300],
+  labels: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+};
+
+export const CasualAnalysisData = [
+  { name: "Lorem", value: 16.66 },
+  { name: "Lorem", value: 16.66 },
+  { name: "Lorem", value: 16.66 },
+  { name: "Lorem", value: 16.66 },
+  { name: "Lorem", value: 16.66 },
+  { name: "Lorem", value: 16.66 },
+];

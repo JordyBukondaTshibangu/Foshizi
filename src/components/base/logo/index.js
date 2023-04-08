@@ -10,6 +10,7 @@ const Logo = ({ dashboard, size }) => {
         dashboard={dashboard}
         width={dashboard}
         height={dashboard}
+        priority
       />
     </LogoContainer>
   );

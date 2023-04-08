@@ -6,7 +6,6 @@ const Input = ({
   label,
   type,
   minLength,
-  maxLength,
   required,
   onChange,
   value,
@@ -19,7 +18,6 @@ const Input = ({
         value={value}
         type={type}
         minLength={minLength}
-        maxLength={maxLength}
         required={required ? true : false}
         errorMessage={errorMessage}
         onChange={onChange}

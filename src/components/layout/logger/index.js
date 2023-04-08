@@ -44,7 +44,7 @@ const Logger = () => {
       router.push("/dashboard");
     }
   };
-  // const handleLoginGoogle = async () => await signIn();
+  const handleLoginGoogle = async () => await signIn();
   const isValidEmail = (e) => {
     setEmail(e.target.value);
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -84,12 +84,12 @@ const Logger = () => {
                 size="md"
                 btnText="Sign In"
               />
-              {/* <Button
+              <Button
                 onClick={handleLoginGoogle}
                 bg="secondary"
                 size="md"
                 btnText="Sign In with Google"
-              /> */}
+              />
             </ButtonContainer>
           </SigninContainer>
           <SignUpContainer>

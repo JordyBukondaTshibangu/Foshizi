@@ -31,11 +31,3 @@ export const RegisterContainer = styled.form`
     gap: 35px;
   }
 `;
-
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-export const InputErrorMessage = styled.span`
-  color: red;
-`;

@@ -3,7 +3,7 @@ import IconText from "@/components/base/iconText";
 import { ColleagueContainer, ColleagueItem } from "./ColleagueCardElement";
 import profileImage from "../../../../assets/images/profile.png";
 
-const ColleagueCard = ({ users, width }) => {
+const ColleagueCard = ({ width }) => {
   const colleagues = [
     {
       profile: profileImage,
@@ -29,12 +29,12 @@ const ColleagueCard = ({ users, width }) => {
   return (
     <Card width={width} title="Colleagues">
       <ColleagueContainer>
-        {users.map(({ firstname, lastname, email }, index) => (
+        {colleagues.map(({ profile, title, subtitle }, index) => (
           <ColleagueItem key={index}>
             <IconText
-              image={profileImage}
-              title={firstname + "" + lastname}
-              subtitle={email}
+              image={profile}
+              title={title}
+              subtitle={subtitle}
               textSize="sm"
             />
           </ColleagueItem>

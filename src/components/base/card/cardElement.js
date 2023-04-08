@@ -11,7 +11,7 @@ export const CardWrapper = styled.div`
   @media (min-width: 1024px) {
     margin-top: 0px;
     width: ${({ width }) =>
-      width === "full" ? "100%" : width === "half" ? "50%" : "30%"};
+    width === "full" ? "100%" : width === "half" ? "50%" : width === "third" ? "75%" : "30%"};
     gap: 20px;
   }
 `;

@@ -1,18 +1,16 @@
 import Link from "next/link";
-import axios from "axios";
 import {
   LayoutWrapper,
   RegisterPanel,
   RegisterContainer,
-  InputContainer,
-  InputErrorMessage,
 } from "./RegisterElement";
 import Input from "@/components/base/input";
 import Button from "@/components/base/button";
 import Logo from "@/components/base/logo";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../base/store/authSlice";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import { Heading_H3, SignUpContainer } from "../logger/LoggerElement";
 
 const Register = () => {
@@ -21,7 +19,8 @@ const Register = () => {
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const router = useRouter();
+  const route = useRouter();
+  const dispatch = useDispatch();
   const [errorMessageEmail, setErrorMessageEamil] = useState("");
   const [errorMessageUsername, setErrorMessageUsername] = useState("");
   const [errorMessagePhone, setErrorMessagePhone] = useState("");
@@ -45,39 +44,16 @@ const Register = () => {
       return;
     } else {
       // Perform login API call here and retrieve user data
-      try {
-        const response = await axios.post(
-          "https://foshizi.herokuapp.com/api/registeruser",
-          {
-            email,
-            password,
-            fname: username,
-            lname: "",
-          }
-        );
-        const { result } = response.data;
-        if (
-          result.status === "bad" &&
-          result.message === "Email already in use"
-        ) {
-          setErrorMessageEamil("Email already used");
-        }
-
-        if (result?._id) {
-          const resAuthLogin = await signIn("credentials", {
-            email,
-            password,
-            redirect: false,
-          });
-          if (resAuthLogin) {
-            router.push("/dashboard");
-          }
-        } else {
-          return null;
-        }
-      } catch (error) {
-        throw new Error(error.message);
-      }
+      dispatch(
+        loginSuccess({
+          name: username,
+          email: email,
+          number: number,
+          password: password,
+          loggedIn: true,
+        })
+      );
+      route.push("/dashboard");
     }
   };
 
@@ -100,62 +76,41 @@ const Register = () => {
       <RegisterPanel>
         <Logo size={350} />
         <RegisterContainer>
-          <InputContainer>
-            <Input
-              label="Email"
-              type="email"
-              value={email}
-              required={true}
-              onChange={(e) => setEmail(e.target.value)}
-              errorMessage={errorMessageEmail}
-            />
-            <InputErrorMessage>{errorMessageEmail}</InputErrorMessage>
-          </InputContainer>
-          <InputContainer>
-            <Input
-              label="Username"
-              type="text"
-              value={username}
-              required={true}
-              onChange={(e) => setUsername(e.target.value)}
-              errorMessage={errorMessageUsername}
-            />
-            <InputErrorMessage>{errorMessageUsername}</InputErrorMessage>
-          </InputContainer>
-          <InputContainer>
-            <Input
-              label="Phone Number"
-              type="text"
-              minLength={10}
-              maxLength={10}
-              value={number}
-              required={true}
-              onChange={(e) => setNumber(e.target.value)}
-              errorMessage={errorMessagePhone}
-            />
-          </InputContainer>
-          <InputContainer>
-            <Input
-              label="Password"
-              type="password"
-              value={password}
-              required={true}
-              onChange={handlePasswordChange}
-              errorMessage={errorMessagePassword}
-            />
-          </InputContainer>
-          <InputContainer>
-            <Input
-              label="Confirm Password"
-              type="password"
-              value={confirmPassword}
-              required={true}
-              onChange={handleConfirmPasswordChange}
-            />
-
-            <InputErrorMessage>{errorMessagePassword}</InputErrorMessage>
-          </InputContainer>
-
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            errorMessage={errorMessageEmail}
+          />
+          <Input
+            label="Username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            errorMessage={errorMessageUsername}
+          />
+          <Input
+            label="Phone Number"
+            type="text"
+            minLength={10}
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            errorMessage={errorMessagePhone}
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            errorMessage={errorMessagePassword}
+          />
+          <Input
+            label="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />
           <Button
             onClick={handleSubmit}
             btnText="Register"
@@ -167,9 +122,7 @@ const Register = () => {
         <SignUpContainer>
           <Heading_H3>Existing account ? </Heading_H3>
           <p>Already a member ?</p>
-          <Link href="/" className="login-link">
-            Login now
-          </Link>
+          <Link href="/">Login now</Link>
         </SignUpContainer>
       </RegisterPanel>
     </LayoutWrapper>

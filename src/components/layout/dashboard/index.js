@@ -7,6 +7,7 @@ import LibraryPanel from "@/components/ui/panels/LibraryPanel";
 import ContactPanel from "@/components/ui/panels/ContactPanel";
 import UpdateSSOPanel from "@/components/ui/panels/UpdateSSOPanel";
 import Logout from "@/components/ui/panels/LogoutPanel";
+import ViewSurveyPanel from "@/components/ui/panels/ViewSurveyPanel";
 import { DashboardWrapper, DashboardMain } from "./DashboardElement";
 import { signOut } from "next-auth/react";
 
@@ -21,7 +22,7 @@ const Dashboard = ({ user, surveys, users }) => {
         setShowActivePanel={setShowActivePanel}
       />
       <DashboardMain>
-        <Header user={user} />
+        <Header user={user} setShowActivePanel={setShowActivePanel} />
         {showActivePanel === "Overview" ? (
           <SettingPanel users={users} />
         ) : showActivePanel === "My Account" ? (
@@ -30,11 +31,13 @@ const Dashboard = ({ user, surveys, users }) => {
           <LibraryPanel />
         ) : showActivePanel === "Contacts" ? (
           <ContactPanel />
-        ) : // ) : showActivePanel === "Update to SSO" ? (
-        //   <UpdateSSOPanel />
-        showActivePanel === "Logout" ? (
+        ) : showActivePanel === "Update to SSO" ? (
+          <UpdateSSOPanel />
+        ) : showActivePanel === "Logout" ? (
           <Logout onClick={signOut()} />
-        ) : null}
+        ) : (
+          <ViewSurveyPanel />
+        )}
       </DashboardMain>
     </DashboardWrapper>
   );

@@ -4,6 +4,9 @@ import ProgressBar from "@/components/base/progressBar";
 import Table from "@/components/base/table";
 import React, { useEffect } from "react";
 import { current } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { selectSurveys } from "@/components/base/store/surveySlice";
+import { selectAnswers } from "@/components/base/store/answerSlice";
 
 const surveys = [
   {
@@ -48,42 +51,15 @@ const surveys = [
 const colors = ["#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91"];
 
 const ViewSurveyPanel = () => {
-  const [surveysData, setSurveysData] = React.useState(null);
+  const surveysData = useSelector(selectSurveys);
+  const answersData = useSelector(selectAnswers);
   const [currentSurvey, setcurrentSurvey] = React.useState(null);
   const [currentSurveyData, setcurrentSurveyData] = React.useState(null);
   const [users, setUsers] = React.useState(null);
 
-  useEffect(() => {
-    const getAllSurveys = async () => {
-      try {
-        const rawData = await fetch(
-          "https://foshizi.herokuapp.com/api/getallsurveys"
-        );
-        const data = await rawData.json();
-        setSurveysData(data.result);
-        setcurrentSurvey(data.result[1]._id);
-        console.log(data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-    const getAllUsers = async () => {
-      try {
-        const rawData = await fetch(
-          "https://foshizi.herokuapp.com/api/getallusers"
-        );
-        const data = await rawData.json();
-        setUsers(data.data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-    console.log("USEEFFECT RUN[ViewSurveyPanel] Data from APIs",surveysData)
-    return () => {
-      getAllSurveys();
-      getAllUsers();
-    };
-  }, []);
+  console.log("NOW VIEWING SURVEYS:",surveysData)
+  console.log("NOW VIEWING ANSWERS:",answersData)
+
 
   useEffect(() => {
     return () => {

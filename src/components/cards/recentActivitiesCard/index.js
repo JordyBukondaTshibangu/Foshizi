@@ -26,9 +26,18 @@ import { FaEnvelope, FaPhoneAlt, FaTasks, FaRocketchat } from "react-icons/fa";
 import { IconElement } from "@/components/ui/header/HeaderElement";
 import { useSession } from "next-auth/react";
 
-const RecentActivitiesCard = ({ width }) => {
+const RecentActivitiesCard = ({ width, user }) => {
   const { data: session } = useSession();
-  const { email } = session.user;
+  // const { email } = session.user;
+  const {
+    email,
+    firstname,
+    lastname,
+    physicalAddress,
+    dateOfBirth,
+    phone,
+    role,
+  } = user;
 
   const recentActivities = [
     {
@@ -56,11 +65,13 @@ const RecentActivitiesCard = ({ width }) => {
   ];
   const details = {
     email,
-    workPhone: "011-767-3456",
-    personalPhone: "089 488 7834",
-    position: "Manager",
+    firstname,
+    lastname,
+    workPhone: phone,
+    personalPhone: phone,
+    position: role ? role : "Analytcis",
     Departement: "Sales",
-    Birthday: "28 June, 1987 (35 y.o)",
+    Birthday: dateOfBirth,
   };
   return (
     <>
@@ -93,7 +104,7 @@ const RecentActivitiesCard = ({ width }) => {
           <TextAreaContainer rows={15}></TextAreaContainer>
         </PreviousActivity>
       </Card>
-      <Card width="" title="Details" comingSoon={true}>
+      <Card width="" title="Details">
         <IconWrapper>
           <DetailsHeading>
             <IconElement bg="grey">

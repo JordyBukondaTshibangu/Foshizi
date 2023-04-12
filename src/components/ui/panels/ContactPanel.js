@@ -4,11 +4,12 @@ import {
   PanelContainer,
 } from "@/components/layout/dashboard/DashboardElement";
 
-const ContactPanel = () => {
+const ContactPanel = ({ user }) => {
+  console.log("User CP", user);
   return (
     <PanelContainer>
       <RowContainer>
-        <RecentActivitiesCard width="full" />
+        <RecentActivitiesCard width="full" user={user} />
       </RowContainer>
     </PanelContainer>
   );

@@ -50,7 +50,7 @@ const Dashboard = ({ user, surveys, users }) => {
           ) : showActivePanel === "Library" ? (
             <LibraryPanel />
           ) : showActivePanel === "Contacts" ? (
-            <ContactPanel />
+            <ContactPanel user={user} />
           ) : showActivePanel === "Update to SSO" ? (
             <UpdateSSOPanel />
           ) : showActivePanel === "Logout" ? (
@@ -58,19 +58,6 @@ const Dashboard = ({ user, surveys, users }) => {
           ) : (
             <ViewSurveyPanel />
           )}
-          {/* {showActivePanel === "Overview" ? (
-            <SettingPanel users={users} />
-          ) : showActivePanel === "My Account" ? (
-            <AccountPanel />
-          ) : showActivePanel === "Library" ? (
-            <LibraryPanel />
-          ) : showActivePanel === "Contacts" ? (
-            <ContactPanel />
-          ) : // ) : showActivePanel === "Update to SSO" ? (
-          //   <UpdateSSOPanel />
-          showActivePanel === "Logout" ? (
-            <Logout onClick={signOut()} />
-          ) : null} */}
         </MainContent>
       </DashboardMain>
     </DashboardWrapper>

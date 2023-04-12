@@ -78,7 +78,7 @@ const ViewSurveyPanel = () => {
         alert(e);
       }
     };
-
+    console.log("USEEFFECT RUN[ViewSurveyPanel] Data from APIs",surveysData)
     return () => {
       getAllSurveys();
       getAllUsers();

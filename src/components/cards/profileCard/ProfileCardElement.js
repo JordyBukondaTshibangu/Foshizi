@@ -11,3 +11,9 @@ export const ProfileItem = styled.li`
   gap: 15px;
   align-items: center;
 `;
+
+export const ParagraphBio = styled.p`
+  font-size: 14px;
+  margin-top: 30px;
+  letter-spacing: 1.1px;
+`;

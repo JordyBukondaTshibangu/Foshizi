@@ -5,7 +5,6 @@ import {
 } from "@/components/layout/dashboard/DashboardElement";
 
 const ContactPanel = ({ user }) => {
-  console.log("User CP", user);
   return (
     <PanelContainer>
       <RowContainer>

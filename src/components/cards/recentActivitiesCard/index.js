@@ -27,17 +27,7 @@ import { IconElement } from "@/components/ui/header/HeaderElement";
 import { useSession } from "next-auth/react";
 
 const RecentActivitiesCard = ({ width, user }) => {
-  const { data: session } = useSession();
-  // const { email } = session.user;
-  const {
-    email,
-    firstname,
-    lastname,
-    physicalAddress,
-    dateOfBirth,
-    phone,
-    role,
-  } = user;
+  const { email, firstname, lastname, dateOfBirth, phone, role } = user;
 
   const recentActivities = [
     {

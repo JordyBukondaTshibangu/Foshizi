@@ -44,7 +44,7 @@ const Dashboard = ({ user, surveys, users }) => {
         />
         <MainContent onClick={closeSideBar} sideBarOpen={sidebarState}>
           {showActivePanel === "Overview" ? (
-            <SettingPanel users={users} />
+            <SettingPanel users={users} user={user} />
           ) : showActivePanel === "My Account" ? (
             <AccountPanel user={user} />
           ) : showActivePanel === "Library" ? (

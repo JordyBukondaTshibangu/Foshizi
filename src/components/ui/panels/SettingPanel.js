@@ -11,19 +11,19 @@ import {
   PanelContainer,
 } from "@/components/layout/dashboard/DashboardElement";
 
-const SettingPanel = ({ users }) => {
+const SettingPanel = ({ users, user }) => {
   return (
     <PanelContainer>
       <RowContainer>
         <AccountDetailsCard width="full" />
-        <ProfileCard width="full" />
+        <ProfileCard width="full" user={user} />
       </RowContainer>
       <RowContainer>
         <LinkedAccountCard width="full" />
         <SurveyCompletedCard width="full" />
       </RowContainer>
       <RowContainer>
-        <ProfileCard width="" />
+        <ProfileCard width="" user={user} />
         <BioCard width="" />
         <CustomerSurveyCompletedCard width="half" />
       </RowContainer>

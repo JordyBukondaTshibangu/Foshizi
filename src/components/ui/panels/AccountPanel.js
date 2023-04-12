@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   RowContainer,
   PanelContainer,
+  RowContainerFeed,
 } from "@/components/layout/dashboard/DashboardElement";
 import Card from "@/components/base/card";
 import Input from "@/components/base/input";
@@ -12,6 +13,8 @@ import Select from "@/components/base/select";
 import axios from "axios";
 import { ButtonContainer } from "@/components/layout/logger/LoggerElement";
 import DeleteAccountModal from "../modals/deleteAccount";
+import Loading from "@/components/feedback/loading";
+import UpdateAccountModal from "../modals/updateAccount";
 
 const provinces = [
   "Select Province",
@@ -34,29 +37,37 @@ const AccountPanel = ({ user }) => {
   const [lastname, setLastname] = useState(user.lastname);
   const [phone, setphone] = useState(user.phone);
 
-  const [number, setStreetNum] = useState(user.physicalAddress.number);
-  const [street, setStreet] = useState(user.physicalAddress.street);
-  const [suburb, setSuburb] = useState(user.physicalAddress.suburb);
-  const [city, setCity] = useState(user.physicalAddress.city);
+  const [number, setStreetNum] = useState(user.physicalAddress?.number);
+  const [street, setStreet] = useState(user.physicalAddress?.street);
+  const [suburb, setSuburb] = useState(user.physicalAddress?.suburb);
+  const [city, setCity] = useState(user.physicalAddress?.city);
   const [province, setProvince] = useState("");
   const [countries, setCountry] = useState("South Africa");
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [errorUser, setErrorUser] = useState("");
 
   const [deleteAccountModal, setDeleteAccount] = useState(false);
+  const [updateAccountModal, setUpdateAccount] = useState(false);
 
   const requestFn = async (field, value) => {
     try {
-      await axios.post("https://foshizi.herokuapp.com/api/updateuser", {
-        user_id: userId,
-        field,
-        value,
-      });
+      const res = await axios.post(
+        "https://foshizi.herokuapp.com/api/updateuser",
+        {
+          user_id: userId,
+          field,
+          value,
+        }
+      );
+      setSuccess(true);
+      setLoading(false);
+      window.location.reload();
     } catch (error) {
-      throw new Error("Something went wrong with your " + field + " update");
+      setError(true);
+      setLoading(false);
+      // throw new Error("Something went wrong with your " + field + " update");
     }
   };
 
@@ -65,32 +76,40 @@ const AccountPanel = ({ user }) => {
     for (let i = 0; i <= fields.length; i++) {
       if (!fields[i]) return false;
       else {
-        if (Object.keys(fields[i])[0] === "firstname" && firstname) {
+        setLoading(true);
+        if (
+          Object.keys(fields[i])[0] === "firstname" &&
+          firstname !== user.firstname
+        ) {
           requestFn(Object.keys(fields[i])[0], firstname);
         }
-        if (Object.keys(fields[i])[0] === "lastname" && lastname) {
+        if (
+          Object.keys(fields[i])[0] === "lastname" &&
+          lastname !== user.lastname
+        ) {
           requestFn(Object.keys(fields[i])[0], lastname);
         }
-        if (Object.keys(fields[i])[0] === "phone" && phone) {
+        if (Object.keys(fields[i])[0] === "phone" && phone !== user.phone) {
           requestFn(Object.keys(fields[i])[0], phone);
         }
 
-        updateAddress();
+        // updateAddress();
+        setUpdateAccount(true);
       }
     }
   };
 
   const updateAddress = () => {
-    if (number) {
+    if (number !== user.physicalAddress?.number) {
       requestFn("physicalAddress.number", parseInt(number));
     }
-    if (street) {
+    if (street !== user.physicalAddress?.street) {
       requestFn("physicalAddress.street", street);
     }
-    if (suburb) {
+    if (suburb !== user.physicalAddress?.suburb) {
       requestFn("physicalAddress.suburb", suburb);
     }
-    if (city) {
+    if (city !== user.physicalAddress?.city) {
       requestFn("physicalAddress.city", city);
     }
     if (country) {
@@ -159,6 +178,7 @@ const AccountPanel = ({ user }) => {
           </InputGroup>
         </Card>
       </RowContainer>
+      <RowContainerFeed>{loading && <Loading />}</RowContainerFeed>
       <RowContainer>
         <Card
           width="full"
@@ -192,6 +212,9 @@ const AccountPanel = ({ user }) => {
       </RowContainer>
       {deleteAccountModal && (
         <DeleteAccountModal userId={userId} cancelDeletion={cancelDeletion} />
+      )}
+      {updateAccountModal && (
+        <UpdateAccountModal success={success} error={error} />
       )}
     </PanelContainer>
   );

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { signOut } from "next-auth/react";
 import { ButtonContainer } from "@/components/layout/logger/LoggerElement";
 import { useState } from "react";
@@ -16,7 +17,6 @@ import Succes from "@/components/feedback/success";
 import Failure from "@/components/feedback/failure";
 
 const DeleteAccountModal = ({ userId, cancelDeletion }) => {
-  console.log(userId);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,10 @@ const DeleteAccountModal = ({ userId, cancelDeletion }) => {
         setLoading(false);
       } else {
         setSuccess(true);
-        signOut();
+        setLoading(false);
+        signOut({
+          callbackUrl: `${window.location.origin}`,
+        });
       }
     } catch (error) {
       setError(true);

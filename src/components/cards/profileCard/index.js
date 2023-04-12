@@ -46,7 +46,7 @@ const ProfileCard = ({ width, tab, user }) => {
     phone,
     role,
     physicalAddress,
-  } = user;
+  } = session;
 
   return (
     <Card width={width} title="Profile">
@@ -71,7 +71,7 @@ const ProfileCard = ({ width, tab, user }) => {
           </IconElement>
           <p>Change password</p>
         </ProfileItem>
-        {physicalAddress.street && (
+        {physicalAddress?.street && (
           <ProfileItem>
             <IconElement bg="#de821c">
               <FaMapMarkerAlt />

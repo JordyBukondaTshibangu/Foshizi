@@ -57,10 +57,10 @@ const Table = ({ data }) => {
             </td>
           </tr>
         ) : (
-          data.map(({ firstname, lastname, email, location, time, _id }) => (
+          data.map(({ firstname, lastname, responder_email, location, time, _id }) => (
             <TableRow
               key={_id}
-              {...{ firstname, email, location, time, lastname }}
+              {...{ firstname, responder_email, location, time, lastname, names: responder_email }}
             />
           ))
         )}

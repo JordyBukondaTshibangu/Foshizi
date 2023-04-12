@@ -171,7 +171,7 @@ const ViewSurveyPanel = () => {
         </h1>
 
         <div style={{ marginTop: "20px", height: "300px", overflow: "auto" }}>
-          <Table data={users} />
+          <Table data={answersData} />
         </div>
       </div>
     </Card>

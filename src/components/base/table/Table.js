@@ -32,27 +32,28 @@ export const TableRow = ({
   time = "00:00",
   link = "#",
 }) => {
-  const [loc, setLoc] = useState("loading...")
 
-  useEffect(() => {
-    const getLocationName = async (location) => {
-      const [latitude, longitude] = location.substring(1, location.length - 1).split(",");
+  // const [loc, setLoc] = useState("loading...")
 
-      const apiKey = process.env.LOCATION_API_KEY || "3dcf9e77cd9d4b56a81f0e33778489e0";
+  // useEffect(() => {
+  //   const getLocationName = async (location) => {
+  //     const [latitude, longitude] = location.substring(1, location.length - 1).split(",");
 
-      try {
-        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`);
-        const data = await response.json();
-        setLoc(data.results[0].components.state);
-      } catch (error) {
-        setLoc(location);
-      }
-    };
+  //     const apiKey = process.env.LOCATION_API_KEY || "3dcf9e77cd9d4b56a81f0e33778489e0";
 
-    return () => {
-      getLocationName(location)
-    }
-  }, [])
+  //     try {
+  //       const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`);
+  //       const data = await response.json();
+  //       setLoc(data.results[0].components.state);
+  //     } catch (error) {
+  //       setLoc(location);
+  //     }
+  //   };
+
+  //   return () => {
+  //     getLocationName(location)
+  //   }
+  // }, [])
 
   return (
     <tr
@@ -63,7 +64,7 @@ export const TableRow = ({
     >
       <td style={{ padding: "10px 0" }}>{names.split("@")[0] /*firstname + " " + lastname*/}</td>
       <td style={{ padding: "10px 0" }}>{responder_email}</td>
-      <td style={{ padding: "10px 0" }}>{loc}</td>
+      <td style={{ padding: "10px 0" }}>{location}</td>
       <td style={{ padding: "10px 0" }}>
         <p style={{ color: "blue", cursor: "pointer" }} onClick={() => { }}> View Results</p>
         {/* <Link

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Card from "@/components/base/card";
 import Table from "@/components/base/table";
@@ -50,6 +50,13 @@ const ViewSurveyPanel = () => {
     }
     setSelectedAnswers(null);
   }
+
+  useEffect(() => {
+    return () => {
+      changeSelectedQuestion(surveysData[0].questions[0].id)
+    }
+  }, [])
+  
 
   return (
     // <PanelContainer>

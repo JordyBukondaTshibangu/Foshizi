@@ -30,9 +30,8 @@ export const TableRow = ({
   responder_email = "axoile@mailcom",
   location = "Unknown",
   time = "00:00",
-  link = "#",
+  link = "#", _id
 }) => {
-
   // const [loc, setLoc] = useState("loading...")
 
   // useEffect(() => {
@@ -66,13 +65,12 @@ export const TableRow = ({
       <td style={{ padding: "10px 0" }}>{responder_email}</td>
       <td style={{ padding: "10px 0" }}>{location}</td>
       <td style={{ padding: "10px 0" }}>
-        <p style={{ color: "blue", cursor: "pointer" }} onClick={() => { }}> View Results</p>
-        {/* <Link
-          href={link}
+        <Link
+          href={`/surveys/${_id}`}
           style={{ color: "#008FDF", textDecoration: "none", fontSize: "16px" }}
         >
           View Results
-        </Link> */}
+        </Link>
       </td>
       <td style={{ padding: "10px 0" }}>{time}</td>
     </tr>

@@ -16,7 +16,7 @@ const ViewSurveyPanel = () => {
 
   const [selectedSurvey, setSelectedSurvey] = useState(surveysData[0]);
   const [selectedQuestion, setSelectedQuestion] = useState(surveysData[0].questions[0]);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState(null);
 
   const changeSelectedSurvey = (e) => {
     const survey = surveysData.find((survey) => survey._id == e);
@@ -129,7 +129,7 @@ const ViewSurveyPanel = () => {
           width: "50%",
         }}
       >
-        {selectedAnswers.map((data, index) => {
+        {!selectedAnswers ? <p>No data...</p> :selectedAnswers.map((data, index) => {
           const percentage = (data[1] / selectedAnswers.length) * 100 > 100 ? 100 : (data[1] / selectedAnswers.length) * 100
           return (
             <ProgressBar

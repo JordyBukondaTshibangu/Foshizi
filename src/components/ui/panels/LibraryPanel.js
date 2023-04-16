@@ -8,32 +8,80 @@ import PerspectivePredictiveAnalysisCard from "@/components/cards/perspectiveAnd
 import StatisticalDataCard from "@/components/cards/statisticalDataCard";
 import CustomerSurveyCompletedCard from "@/components/cards/customerSurveyCompletedCard";
 import ExploratoryDataCard from "@/components/cards/exploratoryDataCard";
+import { useSelector } from "react-redux";
+import { selectSurveys } from "@/components/base/store/surveySlice";
+import { selectAnswers } from "@/components/base/store/answerSlice";
 
 import {
   PerspectivePredictiveAnalysisCardData as PPAD,
   CasualAnalysisData,
 } from "../../../data";
+import { useEffect, useState } from "react";
+import SurveysStatusCard from "@/components/cards/SurveysStatusCard/SurveysStatusCard";
 
 const LibraryPanel = () => {
+  const surveysData = useSelector(selectSurveys);
+  const answersData = useSelector(selectAnswers);
+  const [surveyCountbyname, setSurveyCountbyname] = useState([]);
+  const [openSurveys, setOpenSurveys] = useState(0);
+  const [closedSurveys, setClosedSurveys] = useState(0);
+
+  console.log("Surveys:", surveysData);
+  console.log("Answers:", answersData);
+  const getSurveyCountbyname = (surveysData) => {
+    let surveyCountbyname = [];
+    surveysData.forEach((survey) => {
+      let name = survey.title;
+      let nameIndex = surveyCountbyname.findIndex((item) => item.name == name);
+      if (nameIndex == -1) {
+        surveyCountbyname.push({ name: name, value: 1 });
+      } else {
+        surveyCountbyname[nameIndex].value += 1;
+      }
+    });
+    setSurveyCountbyname(surveyCountbyname);
+    console.log("surveys count : ", surveyCountbyname);
+  };
+  const getSurveysStatus = (surveysData) => {
+    let openSurveys = 0;
+    let closedSurveys = 0;
+    surveysData.forEach((survey) => {
+      if (survey.isClosed == false) {
+        openSurveys += 1;
+      } else {
+        closedSurveys += 1;
+      }
+    });
+    setOpenSurveys(openSurveys);
+    setClosedSurveys(closedSurveys);
+  };
+
+  useEffect(() => {
+    getSurveyCountbyname(surveysData);
+    getSurveysStatus(surveysData);
+  }, [surveysData]);
+
   return (
     <div style={{ width: "99%", paddingRight: "2%", boxSizing: "border-box" }}>
       <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr" }}>
         <div style={{ paddingLeft: "1%", paddingRight: "1%" }}>
           <RowContainer>
-            <CasualAnalysisCard width="half" labelsData={CasualAnalysisData} />
-            <PerspectivePredictiveAnalysisCard
-              width="third"
+            <CasualAnalysisCard width="half" labelsData={surveyCountbyname} />
+            <SurveysStatusCard
+              openSurveys={openSurveys}
+              closedSurveys={closedSurveys}
             />
+
           </RowContainer>
           <RowContainer>
-            <StatisticalDataCard width="half" />
-            <CustomerSurveyCompletedCard width="third" />
+            {/* Not getting the survey title in the answers API, so I could not finish this */}
+            <StatisticalDataCard width='half' />
+            {/* <CustomerSurveyCompletedCard width="third" /> */}
           </RowContainer>
         </div>
         <RowContainer>
           <ProfileCard width="full" tab="library" />
         </RowContainer>
-
       </div>
 
       {/* <RowContainer>

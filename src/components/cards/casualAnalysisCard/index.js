@@ -17,8 +17,9 @@ const CasualAnalysisCard = ({width,
     locale: "en-UK",
     plugins: {
       legend: {
-        display : false,
+        display : true,
         position: "bottom",
+        
         align: "center",
         labels: {
           usePointStyle: true,
@@ -27,6 +28,7 @@ const CasualAnalysisCard = ({width,
           textAlign: "center",
           useBorderRadius: true,
           borderRadius: 510,
+          color: "white",
         },
       },
     },
@@ -39,10 +41,10 @@ const CasualAnalysisCard = ({width,
         //label: "# of Votes",
         data: labelsData.map(item=> item.value),
         backgroundColor: ["red", "purple", "blue", "green", "orange", "yellow"],
-        label: labelsData.map(item=> item.name),
+        label: labelsData.map(item=> item.name.split(" ")[0]),
         borderWidth: 0,
         offset: [10, 20],
-        spacing: 0,
+        spacing: 5,
         cutout: "40%",
         rotation: 30,
         hoverOffset: 30,
@@ -51,7 +53,7 @@ const CasualAnalysisCard = ({width,
   };
 
   return (
-    <Card width={width} title="Casual Analysis">
+    <Card width={width} title="Surveys Created">
       <Container>
         <Doughnut data={data} options={options} updateMode="resize" />
       </Container>

@@ -28,6 +28,7 @@ const LibraryPanel = () => {
 
   console.log("Surveys:", surveysData);
   console.log("Answers:", answersData);
+  const totalAnswers=answersData.length;
   const getSurveyCountbyname = (surveysData) => {
     let surveyCountbyname = [];
     surveysData.forEach((survey) => {
@@ -74,8 +75,8 @@ const LibraryPanel = () => {
 
           </RowContainer>
           <RowContainer>
-            {/* Not getting the survey title in the answers API, so I could not finish this */}
-            <StatisticalDataCard width='half' />
+        
+            <StatisticalDataCard width='half' answers={totalAnswers} />
             {/* <CustomerSurveyCompletedCard width="third" /> */}
           </RowContainer>
         </div>

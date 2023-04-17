@@ -8,7 +8,7 @@ import {
 } from "react-circular-progressbar";
 import { CircularProgressbarChild } from "../surveyCompletedCard/SurveryCompletedCardElement";
 
-const StatisticalDataCard = ({ width }) => {
+const StatisticalDataCard = ({ width,answers }) => {
   const styles = {
     trailColor: "#343a3f",
     strokeLinecap: "butt",
@@ -18,9 +18,8 @@ const StatisticalDataCard = ({ width }) => {
 
   
   const data = [
-    { name: "SAB", value: 7 },
-    { name: "NBev", value: 6 },
-    { name: "AB in dev", value: 5 },
+    { name: "Total Answers", value: answers },
+
   ];
   return (
     <Card width={width} title="Answers">
@@ -30,7 +29,7 @@ const StatisticalDataCard = ({ width }) => {
             <ProgressbarContainer>
               <CircularProgressbarWithChildren
                 value={item.value}
-                maxValue={10}
+                maxValue={100}
                 children={
                   <CircularProgressbarChild
                     text={item.name}

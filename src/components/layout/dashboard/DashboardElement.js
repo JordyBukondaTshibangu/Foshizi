@@ -59,3 +59,10 @@ export const RowContainer = styled.div`
     padding: 20px 0;
   }
 `;
+
+export const RowContainerFeed = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+`;

@@ -36,7 +36,10 @@ const DeleteAccountModal = ({ userId, cancelDeletion }) => {
         setLoading(false);
       } else {
         setSuccess(true);
-        signOut();
+        setLoading(false);
+        signOut({
+          callbackUrl: `${window.location.origin}`,
+        });
       }
     } catch (error) {
       setError(true);

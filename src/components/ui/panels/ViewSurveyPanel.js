@@ -1,100 +1,26 @@
-import { PanelContainer } from "@/components/layout/dashboard/DashboardElement";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Card from "@/components/base/card";
-import ProgressBar from "@/components/base/progressBar";
 import Table from "@/components/base/table";
-import React, { useEffect } from "react";
-import { current } from "@reduxjs/toolkit";
+import ProgressBar from "@/components/base/progressBar";
+import { selectSurveys } from "@/components/base/store/surveySlice";
+import { selectAnswers } from "@/components/base/store/answerSlice";
+import { PanelContainer } from "@/components/layout/dashboard/DashboardElement";
 
-const surveys = [
-  {
-    id: 1,
-    title: "SAB",
-    questions: [
-      {
-        id: 1,
-        text: "How satisfied are you with our product?",
-        answers: [
-          {
-            id: 5,
-            percentage: 40,
-            text: "Very Satisfied",
-          },
-          {
-            id: 2,
-            percentage: 5,
-            text: "Satisfied",
-          },
-          {
-            id: 6,
-            percentage: 10,
-            text: "Neutral",
-          },
-          {
-            id: 8,
-            percentage: 35,
-            text: "Dissatisfied",
-          },
-          {
-            id: 1,
-            percentage: 75,
-            text: "Very dissatisfied",
-          },
-        ],
-      },
-    ],
-  },
-];
 
-const colors = ["#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91"];
+const colors = ["#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91", "#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91", "#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91", "#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91", "#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91", "#1C75BC", "#8DC63F", "#009444", "#662D91", "#662D91"];
 
 const ViewSurveyPanel = () => {
-  const [surveysData, setSurveysData] = React.useState(null);
-  const [currentSurvey, setcurrentSurvey] = React.useState(null);
-  const [currentSurveyData, setcurrentSurveyData] = React.useState(null);
-  const [users, setUsers] = React.useState(null);
+  const surveysData = useSelector(selectSurveys);
+  const answersData = useSelector(selectAnswers);
 
-  useEffect(() => {
-    const getAllSurveys = async () => {
-      try {
-        const rawData = await fetch(
-          "https://foshizi.herokuapp.com/api/getallsurveys"
-        );
-        const data = await rawData.json();
-        setSurveysData(data.result);
-        setcurrentSurvey(data.result[1]._id);
-        console.log(data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-    const getAllUsers = async () => {
-      try {
-        const rawData = await fetch(
-          "https://foshizi.herokuapp.com/api/getallusers"
-        );
-        const data = await rawData.json();
-        setUsers(data.data);
-      } catch (e) {
-        alert(e);
-      }
-    };
-    console.log("USEEFFECT RUN[ViewSurveyPanel] Data from APIs",surveysData)
-    return () => {
-      getAllSurveys();
-      getAllUsers();
-    };
-  }, []);
 
   useEffect(() => {
     return () => {
-      if (surveysData) {
-        const filtered = surveysData?.filter(
-          (item) => item._id == currentSurvey
-        );
-        setcurrentSurveyData(filtered[0]);
-      }
-    };
-  }, [currentSurvey, surveysData]);
+      changeSelectedQuestion(surveysData[0].questions[0].id)
+    }
+  }, [])
+
 
   return (
     // <PanelContainer>
@@ -118,8 +44,8 @@ const ViewSurveyPanel = () => {
           Survey Results:
         </h2>
         <select
-          value={currentSurvey}
-          onChange={(e) => setcurrentSurvey(e.target.value)}
+          value={selectedSurvey._id}
+          onChange={(e) => changeSelectedSurvey(e.target.value)}
           placeholder="Loading..."
           style={{
             border: "1px solid rgba(255, 255, 255, 0.2)",
@@ -140,8 +66,8 @@ const ViewSurveyPanel = () => {
 
       <div style={{ marginTop: "20px" }}>
         <select
-          defaultValue={currentSurveyData?.text || "Click to select..."}
-          //onChange={(e) => setcurrentSurveyData(e.target.value)}
+          value={selectedQuestion?.id}
+          onChange={(e) => changeSelectedQuestion(e.target.value)}
           placeholder="Question loading..."
           style={{
             border: "1px solid rgba(255, 255, 255, 0.2)",
@@ -152,8 +78,8 @@ const ViewSurveyPanel = () => {
             color: "white",
           }}
         >
-          {currentSurveyData?.questions?.map((item) => (
-            <option key={item._id} value={item.text}>
+          {selectedSurvey?.questions?.map((item) => (
+            <option key={item.id} value={item.id}>
               {item.text}
             </option>
           ))}
@@ -167,15 +93,23 @@ const ViewSurveyPanel = () => {
           width: "50%",
         }}
       >
-        {surveys[0].questions[0].answers.map((data, index) => (
-          <ProgressBar
-            key={data.id}
-            bgcolor={colors[index]}
-            progress={data.percentage}
-            id={data.id}
-            text={data.text}
-          />
-        ))}
+        {selectedAnswers ? selectedAnswers.map((data, index) => {
+          let total = 0
+          for (let i = 0; i < selectedAnswers.length; i++) {
+            total = total + selectedAnswers[i][1];
+          }
+
+          const percentage = data[1] / total * 100
+          return (
+            <ProgressBar
+              key={index}
+              bgcolor={colors[index]}
+              progress={percentage.toFixed(0)}
+              id={data[1]}
+              text={data[0]}
+            />
+          )
+        }) : <p>No data...</p>}
       </div>
 
       <div
@@ -195,7 +129,7 @@ const ViewSurveyPanel = () => {
         </h1>
 
         <div style={{ marginTop: "20px", height: "300px", overflow: "auto" }}>
-          <Table data={users} />
+          <Table data={answersData} />
         </div>
       </div>
     </Card>

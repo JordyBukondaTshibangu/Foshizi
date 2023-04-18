@@ -1,0 +1,89 @@
+{
+    "result": [
+        {
+            "_id": "643563e13f39de99a5058cb1",
+            "survey_id": "64356389b6784994594c8330",
+            "location": "-26.1738913, 28.0052167}",
+            "responder_email": "kenanpage@gmail.com",
+            "date_created": "2023-04-11T13:42:56.569000+00:00",
+            "data": {
+                "0": "Yes",
+                "1": "You are the main decision maker",
+                "2": "We are planning on making some renovations in the next 6 months",
+                "3": "No",
+                "4": "To improve the value of my home",
+                "5": "For safety reasons",
+                "6": "Internet/Online",
+                "10000": "kenanpage@gmail.com"
+            }
+        },
+        {
+            "_id": "643565543f39de99a5058cb2",
+            "survey_id": "64356389b6784994594c8330",
+            "location": "-26.1738913, 28.0052167}",
+            "responder_email": "kfkasongo4@gmail.com",
+            "date_created": "2023-04-11T13:49:08.641000+00:00",
+            "data": {
+                "0": "Yes",
+                "1": "You have joint responsibility in the decision making process",
+                "2": "We have not built a new home in the past 6 months and are not planning on building any",
+                "3": "No",
+                "4": "For safety reasons",
+                "5": "I did not build a new home",
+                "6": "Word of mouth from friends and family",
+                "10000": "kfkasongo4@gmail.com"
+            }
+        },
+        {
+            "_id": "643568623f39de99a5058cb3",
+            "survey_id": "64356804b6784994594c8331",
+            "location": "-26.1738913, 28.0052167}",
+            "responder_email": "kasongokenan@yahoo.fr",
+            "date_created": "2023-04-11T14:02:10.322000+00:00",
+            "data": {
+                "0": "Yes",
+                "1": "You are not involved in any way in the final decision-making process",
+                "2": "We are planning on building a new home in the next 6 months",
+                "3": "Yes",
+                "4": "I wanted to turn my home into an investment property",
+                "5": "I did not want to buy a new one",
+                "6": "Contractor",
+                "10000": "kasongokenan@yahoo.fr"
+            }
+        },
+        {
+            "_id": "64356a373f39de99a5058cb4",
+            "survey_id": "64356804b6784994594c8331",
+            "location": "-26.1840523, 28.0187669}",
+            "responder_email": "kenanpage@gmail.com",
+            "date_created": "2023-04-11T14:09:58.510000+00:00",
+            "data": {
+                "0": "Yes",
+                "1": "You have joint responsibility in the decision making process",
+                "2": "We have built a new home in the past 6 months",
+                "3": "No",
+                "4": "For safety reasons",
+                "5": "I did not want to buy a new one",
+                "6": "Internet/Online",
+                "10000": "kenanpage@gmail.com"
+            }
+        },
+        {
+            "_id": "64357416882f4e68d9b3dafa",
+            "survey_id": "64356804b6784994594c8331",
+            "location": "-26.092867040366148, 28.00543673180121}",
+            "responder_email": "gibayatobele@gmail.com",
+            "date_created": "2023-04-11T14:52:06.071000+00:00",
+            "data": {
+                "0": "Yes",
+                "1": "You have joint responsibility in the decision making process",
+                "2": "We have done some renovations in the past 6 months",
+                "3": "Yes",
+                "4": "For safety reasons",
+                "5": "For safety reasons",
+                "6": "Word of mouth from friends and family",
+                "10000": "gibayatobele@gmail.com "
+            }
+        }
+    ]
+}

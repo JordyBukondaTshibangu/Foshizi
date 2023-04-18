@@ -3,8 +3,8 @@ const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
     text: {
       padding: "10px",
       color: "#fff",
-      fontWeight: "200",
       fontSize: "12px",
+      fontWeight: "bold"
     },
   };
   return (
@@ -16,6 +16,8 @@ const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
         borderRadius: "4px",
         borderColor: "rgba(0; 0; 0; 0.2)",
         margin: " 15px 0",
+        position: "relative",
+        maxWidth: "50vw"
       }}
     >
       <div
@@ -27,6 +29,16 @@ const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
           textAlign: "left",
           display: "flex",
           alignItems: "center",
+          maxWidth: "50vw"
+        }}
+      />
+      <div
+        style={{
+          textAlign: "left",
+          display: "flex",
+          alignItems: "center",
+          position: "absolute",
+          top: "15%",
         }}
       >
         <span style={style.text}>{`${id}`}</span>
@@ -34,7 +46,6 @@ const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
         <span
           style={{
             ...style.text,
-            width: "50%",
           }}
         >{`${text}`}</span>
       </div>

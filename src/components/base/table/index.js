@@ -60,7 +60,7 @@ const Table = ({ data }) => {
           data.map(({ firstname, lastname, responder_email, location, time, _id }) => (
             <TableRow
               key={_id}
-              {...{ firstname, responder_email, location, time, lastname, names: responder_email }}
+              {...{ firstname, responder_email, location, time, lastname, names: responder_email, _id  }}
             />
           ))
         )}

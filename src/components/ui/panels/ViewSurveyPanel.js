@@ -130,7 +130,7 @@ const ViewSurveyPanel = () => {
           width: "50%",
         }}
       >
-        {!selectedAnswers ? <p>No data...</p> : selectedAnswers.map((data, index) => {
+        {selectedAnswers ? selectedAnswers.map((data, index) => {
           const percentage = (data[1] / selectedAnswers.length) * 100 > 100 ? 100 : (data[1] / selectedAnswers.length) * 100
           return (
             <ProgressBar
@@ -141,7 +141,7 @@ const ViewSurveyPanel = () => {
               text={data[0]}
             />
           )
-        })}
+        }) : <p>No data...</p>}
       </div>
 
       <div

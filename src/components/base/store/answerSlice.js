@@ -17,7 +17,10 @@ export const selectAnswers = (state) => {
 };
 
 // Selector for getting a survey by its title
-export const selectAnswersBySurveyId = (survey_id) => (state) =>
-  state.answers.find((ans) => ans.survey_id === survey_id);
+export const selectAnswersBySurveyId = (survey_id) => {
+  return (state) =>
+    state.answer.find((ans) => ans._id == survey_id);
+}
+
 
 export default answerSlice.reducer;

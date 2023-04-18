@@ -131,12 +131,17 @@ const ViewSurveyPanel = () => {
         }}
       >
         {selectedAnswers ? selectedAnswers.map((data, index) => {
-          const percentage = (data[1] / selectedAnswers.length) * 100 > 100 ? 100 : (data[1] / selectedAnswers.length) * 100
+          let total = 0
+          for (let i = 0; i < selectedAnswers.length; i++) {
+            total = total + selectedAnswers[i][1];
+          }
+
+          const percentage = data[1] / total * 100
           return (
             <ProgressBar
               key={index}
               bgcolor={colors[index]}
-              progress={percentage}
+              progress={percentage.toFixed(0)}
               id={data[1]}
               text={data[0]}
             />

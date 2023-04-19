@@ -21,27 +21,25 @@ import { setSurveys } from "@/components/base/store/surveySlice";
 import { setAnswers } from "@/components/base/store/answerSlice";
 
 const Dashboard = ({ user, surveys, users }) => {
+  console.log(user);
   const dispatch = useDispatch();
 
   const [sidebarState, setSideBarState] = useState(true);
   const [showActivePanel, setShowActivePanel] = useState("Overview");
 
   const getAllSurveys_Call = async () => {
-    const surveys_ = await getAllSurveys()
+    const surveys_ = await getAllSurveys();
 
-    dispatch(setSurveys(surveys_))
-    const answers_ = await getAllAnswers()
+    dispatch(setSurveys(surveys_));
+    const answers_ = await getAllAnswers();
 
-    dispatch(setAnswers(answers_))
-
-  }
+    dispatch(setAnswers(answers_));
+  };
   useEffect(() => {
     getAllSurveys_Call().then(() => {
       //you can set a loader here
-    })
-  }, [])
-
-
+    });
+  }, []);
 
   const toggleSidebarState = () => setSideBarState(!sidebarState);
   const closeSideBar = () => {
@@ -69,7 +67,7 @@ const Dashboard = ({ user, surveys, users }) => {
           {showActivePanel === "Overview" ? (
             <SettingPanel users={users} />
           ) : showActivePanel === "My Account" ? (
-            <AccountPanel />
+            <AccountPanel user={user} />
           ) : showActivePanel === "Library" ? (
             <LibraryPanel />
           ) : showActivePanel === "Contacts" ? (

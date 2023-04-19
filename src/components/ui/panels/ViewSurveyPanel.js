@@ -14,6 +14,43 @@ const ViewSurveyPanel = () => {
   const surveysData = useSelector(selectSurveys);
   const answersData = useSelector(selectAnswers);
 
+  const [selectedAnswers, setSelectedAnswers] = useState(null); //3
+  const [selectedSurvey, setSelectedSurvey] = useState(surveysData[0]); //1
+  const [selectedQuestion, setSelectedQuestion] = useState(surveysData[0].questions[0]); //2
+
+  const changeSelectedSurvey = (e) => {
+    const survey = surveysData.find((survey) => survey._id == e);
+    setSelectedSurvey(survey);
+
+    changeSelectedQuestion(survey.questions[0].id)
+  }
+
+  const changeSelectedQuestion = async (e) => {
+    const question = await selectedSurvey.questions.find((question) => question.id == e);
+    setSelectedQuestion(question);
+
+    const singleSurveyAnswers = await answersData.filter((answer) => answer.survey_id == selectedSurvey._id);
+
+    if (singleSurveyAnswers) {
+      const values = [];
+      await singleSurveyAnswers.forEach(response => {
+        const data = response.data;
+        if (data.hasOwnProperty(`${question.id}`)) {
+          const index = values.findIndex(element => element[0] === data[`${question.id}`]);
+          if (index >= 0) {
+            values[index][1]++;
+          } else {
+            values.push([data[`${question.id}`], 1]);
+          }
+        }
+      });
+
+      setSelectedAnswers(values);
+      return;
+    }
+
+    setSelectedAnswers(null);
+  }
 
   useEffect(() => {
     return () => {

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import SideBar from "../../ui/sideBar";
 import Header from "@/components/ui/header";
@@ -21,8 +22,8 @@ import { setSurveys } from "@/components/base/store/surveySlice";
 import { setAnswers } from "@/components/base/store/answerSlice";
 
 const Dashboard = ({ user, surveys, users }) => {
-  console.log(user);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [sidebarState, setSideBarState] = useState(true);
   const [showActivePanel, setShowActivePanel] = useState("Overview");
@@ -39,7 +40,7 @@ const Dashboard = ({ user, surveys, users }) => {
     getAllSurveys_Call().then(() => {
       //you can set a loader here
     });
-  }, []);
+  }, [user]);
 
   const toggleSidebarState = () => setSideBarState(!sidebarState);
   const closeSideBar = () => {
@@ -71,7 +72,7 @@ const Dashboard = ({ user, surveys, users }) => {
           ) : showActivePanel === "Library" ? (
             <LibraryPanel />
           ) : showActivePanel === "Contacts" ? (
-            <ContactPanel />
+            <ContactPanel user={user} />
           ) : showActivePanel === "Update to SSO" ? (
             <UpdateSSOPanel />
           ) : showActivePanel === "Logout" ? (

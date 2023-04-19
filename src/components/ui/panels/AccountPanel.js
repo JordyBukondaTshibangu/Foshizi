@@ -31,7 +31,6 @@ const provinces = [
 const country = ["South Africa"];
 
 const AccountPanel = ({ user }) => {
-  console.log(user);
   const userId = user?._id;
 
   const [firstname, setFirstname] = useState(user.firstname);

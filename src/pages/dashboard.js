@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
 import Dashboard from "@/components/layout/dashboard";
 import { useRouter } from "next/router";
 
@@ -13,6 +13,10 @@ const DashboardPage = ({ surveys, users }) => {
   const personalDetails = users.filter(
     (detail) => detail.email === session?.user.email
   )[0];
+
+  if (!personalDetails) {
+    signOut("/register");
+  }
 
   return (
     <Dashboard

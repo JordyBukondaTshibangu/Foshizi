@@ -49,7 +49,9 @@ const Table = ({ data }) => {
         <HRLine />
       </thead>
 
-      <tbody>
+      <tbody
+        style={{ marginTop: "50px", maxHeight: "500px", overflow: "auto" }}
+      >
         {!data ? (
           <tr>
             <td>
@@ -57,12 +59,22 @@ const Table = ({ data }) => {
             </td>
           </tr>
         ) : (
-          data.map(({ firstname, lastname, responder_email, location, time, _id }) => (
-            <TableRow
-              key={_id}
-              {...{ firstname, responder_email, location, time, lastname, names: responder_email, _id  }}
-            />
-          ))
+          data.map(
+            ({ firstname, lastname, responder_email, location, time, _id }) => (
+              <TableRow
+                key={_id}
+                {...{
+                  firstname,
+                  responder_email,
+                  location,
+                  time,
+                  lastname,
+                  names: responder_email,
+                  _id,
+                }}
+              />
+            )
+          )
         )}
       </tbody>
     </table>

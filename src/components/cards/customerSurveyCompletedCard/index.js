@@ -45,7 +45,7 @@ const CustomerSurveyCompletedCard = ({ width }) => {
     },
   ];
   return (
-    <Card width={width} title="Customer Survey Completed">
+    <Card width={width} title="Customer Survey Completed" comingSoon={true}>
       <Heading>
         <SurveyList>Completed</SurveyList>
         <Status>

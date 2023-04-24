@@ -85,9 +85,7 @@ const SurveyCompletedCard = () => {
   return (
     <Card width="full" title="Survey Complete">
       <ContentContainer>
-        <Content>
-          {!first ? <h1>Failed...</h1> : <DataHolder data={first} />}
-        </Content>
+        <Content>{first && <DataHolder data={first} />}</Content>
       </ContentContainer>
       <ContentContainer>
         <div>

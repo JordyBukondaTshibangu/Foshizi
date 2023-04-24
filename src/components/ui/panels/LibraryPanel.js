@@ -28,7 +28,7 @@ const LibraryPanel = () => {
 
   console.log("Surveys:", surveysData);
   console.log("Answers:", answersData);
-  const totalAnswers=answersData.length;
+  const totalAnswers = answersData.length;
   const getSurveyCountbyname = (surveysData) => {
     let surveyCountbyname = [];
     surveysData.forEach((survey) => {
@@ -63,32 +63,25 @@ const LibraryPanel = () => {
   }, [surveysData]);
 
   return (
-    <div style={{ width: "99%", paddingRight: "2%", boxSizing: "border-box" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "3fr 1fr" }}>
-        <div style={{ paddingLeft: "1%", paddingRight: "1%" }}>
-          <RowContainer>
-            <CasualAnalysisCard width="half" labelsData={surveyCountbyname} />
-            <SurveysStatusCard
-              openSurveys={openSurveys}
-              closedSurveys={closedSurveys}
-            />
-
-          </RowContainer>
-          <RowContainer>
-        
-            <StatisticalDataCard width='half' answers={totalAnswers} />
-            {/* <CustomerSurveyCompletedCard width="third" /> */}
-          </RowContainer>
-        </div>
-        <RowContainer>
-          <ProfileCard width="full" tab="library" />
-        </RowContainer>
-      </div>
-
+    <PanelContainer>
+      <RowContainer>
+        <CasualAnalysisCard width="half" labelsData={surveyCountbyname} />
+        <SurveysStatusCard
+          openSurveys={openSurveys}
+          closedSurveys={closedSurveys}
+        />
+      </RowContainer>
+      <RowContainer>
+        <StatisticalDataCard width="half" answers={totalAnswers} />
+        <CustomerSurveyCompletedCard width="third" />
+      </RowContainer>
+      <RowContainer>
+        <ProfileCard width="full" tab="library" />
+      </RowContainer>
       {/* <RowContainer>
         <ExploratoryDataCard width="third" />
-      </RowContainer>  */}
-    </div>
+      </RowContainer> */}
+    </PanelContainer>
   );
 };
 

@@ -4,7 +4,6 @@ import {
   PanelContainer,
 } from "@/components/layout/dashboard/DashboardElement";
 import CasualAnalysisCard from "@/components/cards/casualAnalysisCard";
-import PerspectivePredictiveAnalysisCard from "@/components/cards/perspectiveAndPredictiveAnalyseCard";
 import StatisticalDataCard from "@/components/cards/statisticalDataCard";
 import CustomerSurveyCompletedCard from "@/components/cards/customerSurveyCompletedCard";
 import ExploratoryDataCard from "@/components/cards/exploratoryDataCard";
@@ -12,10 +11,6 @@ import { useSelector } from "react-redux";
 import { selectSurveys } from "@/components/base/store/surveySlice";
 import { selectAnswers } from "@/components/base/store/answerSlice";
 
-import {
-  PerspectivePredictiveAnalysisCardData as PPAD,
-  CasualAnalysisData,
-} from "../../../data";
 import { useEffect, useState } from "react";
 import SurveysStatusCard from "@/components/cards/SurveysStatusCard/SurveysStatusCard";
 
@@ -26,8 +21,6 @@ const LibraryPanel = () => {
   const [openSurveys, setOpenSurveys] = useState(0);
   const [closedSurveys, setClosedSurveys] = useState(0);
 
-  console.log("Surveys:", surveysData);
-  console.log("Answers:", answersData);
   const totalAnswers = answersData.length;
   const getSurveyCountbyname = (surveysData) => {
     let surveyCountbyname = [];
@@ -41,7 +34,6 @@ const LibraryPanel = () => {
       }
     });
     setSurveyCountbyname(surveyCountbyname);
-    console.log("surveys count : ", surveyCountbyname);
   };
   const getSurveysStatus = (surveysData) => {
     let openSurveys = 0;

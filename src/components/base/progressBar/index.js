@@ -1,37 +1,17 @@
+import { ProgressbarContainer } from "./ProgressBarElement";
+
 const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
   const style = {
     text: {
       padding: "10px",
       color: "#fff",
       fontSize: "12px",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
   };
   return (
-    <div
-      style={{
-        height: "44px",
-        width: "100%",
-        backgroundColor: "#3a434c",
-        borderRadius: "4px",
-        borderColor: "rgba(0; 0; 0; 0.2)",
-        margin: " 15px 0",
-        position: "relative",
-        maxWidth: "50vw"
-      }}
-    >
-      <div
-        style={{
-          height: "100%",
-          width: `${progress}%`,
-          backgroundColor: bgcolor,
-          borderRadius: "4px",
-          textAlign: "left",
-          display: "flex",
-          alignItems: "center",
-          maxWidth: "50vw"
-        }}
-      />
+    <ProgressbarContainer>
+      <CurrentProgress width={progress} />
       <div
         style={{
           textAlign: "left",
@@ -49,7 +29,7 @@ const ProgressBar = ({ bgcolor = "blue", progress, text, id }) => {
           }}
         >{`${text}`}</span>
       </div>
-    </div>
+    </ProgressbarContainer>
   );
 };
 

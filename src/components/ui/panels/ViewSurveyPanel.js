@@ -5,40 +5,7 @@ import Table from "@/components/base/table";
 import ProgressBar from "@/components/base/progressBar";
 import { selectSurveys } from "@/components/base/store/surveySlice";
 import { selectAnswers } from "@/components/base/store/answerSlice";
-import { PanelContainer } from "@/components/layout/dashboard/DashboardElement";
-
-const colors = [
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-  "#1C75BC",
-  "#8DC63F",
-  "#009444",
-  "#662D91",
-  "#662D91",
-];
+import { colors } from "@/data";
 
 const ViewSurveyPanel = () => {
   const surveysData = useSelector(selectSurveys);
@@ -97,7 +64,6 @@ const ViewSurveyPanel = () => {
   }, []);
 
   return (
-    // <PanelContainer>
     <Card width="full">
       <div
         style={{
@@ -214,7 +180,6 @@ const ViewSurveyPanel = () => {
         </div>
       </div>
     </Card>
-    // </PanelContainer>
   );
 };
 
